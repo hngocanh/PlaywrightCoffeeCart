@@ -1,7 +1,6 @@
 // @ts-check
 const { test, expect } = require('@playwright/test');
-import { cartPageLocator } from '../Locators/CartPage'
-import { menuPageLocator } from '../Locators/MenuPage'
+import { cartPageLocator, menuPageLocator  } from '../Locators'
 import { info } from '../TestData/Data'
 
 
