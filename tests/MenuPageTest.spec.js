@@ -3,9 +3,12 @@ const { test, expect } = require('@playwright/test');
 import { cartPageLocator } from '../Locators/CartPage'
 import { menuPageLocator } from '../Locators/MenuPage'
 import { info } from '../TestData/Data'
+import { MenuPage } from '../PageObjects/MenuPage'
 
 test('All items are visible', async ({ page }) => {
-  await page.goto('https://coffee-cart.app/');
+
+  const menuPage = new MenuPage(page);
+  await menuPage.goto();
 
   // Expect all items are visible
   await expect(page.locator(menuPageLocator.americano)).toBeVisible();
@@ -22,7 +25,8 @@ test('All items are visible', async ({ page }) => {
 
 
 test('Items are added and checkout is successful from Menu page', async ({ page }) => {
-  await page.goto('https://coffee-cart.app/');
+  const menuPage = new MenuPage(page);
+  await menuPage.goto();
 
   // Add first item
   await page.locator(menuPageLocator.americano).click();
@@ -45,7 +49,8 @@ test('Items are added and checkout is successful from Menu page', async ({ page 
 
 
 test('Hover over Total box and add/remove items', async ({ page }) => {
-  await page.goto('https://coffee-cart.app/');
+  const menuPage = new MenuPage(page);
+  await menuPage.goto();
 
   // Add first item
   await page.locator(menuPageLocator.americano).click();
