@@ -35,13 +35,11 @@ test('Items are added and checkout is successful from Menu page', async ({ page 
   await page.locator(menuPageLocator.cafeLatte).click();
 
   // Checkout
-  await page.locator(menuPageLocator.checkOutButton).click();
-  await page.locator(menuPageLocator.name).fill(info.userName);
-  await page.locator(menuPageLocator.email).fill(info.email);
+  await menuPage.checkOut();
 
   // Click Submit
-  await page.locator(menuPageLocator.submitButton).click();
-
+  await menuPage.submit();
+  
   // Checkout is successful
   await expect(page.locator('text=Thanks for your purchase. Please check your email for payment.')).toBeVisible();
 
@@ -49,7 +47,7 @@ test('Items are added and checkout is successful from Menu page', async ({ page 
 
 
 test('Hover over Total box and add/remove items', async ({ page }) => {
-  const menuPage = new MenuPage(page);
+    const menuPage = new MenuPage(page);
   await menuPage.goto();
 
   // Add first item
