@@ -2,7 +2,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import { cartPageLocator, menuPageLocator } from '../Locators'
 
-export class MenuPage {
+export class MenuPage  {
     readonly page: Page;
 
     constructor(page: Page) {
