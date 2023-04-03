@@ -17,9 +17,7 @@ test('Items are added and checkout is successful from Cart page', async ({ page 
   await page.locator(menuPageLocator.CART).click();
 
   // Checkout
-  await page.locator(menuPageLocator.CHECKOUT_BTN).click();
-  await page.locator(menuPageLocator.NAME).fill(info.userName);
-  await page.locator(menuPageLocator.EMAIL).fill(info.email);
+  await menuPage.submit();
 
   // Click Submit
   await page.locator(menuPageLocator.SUBMIT_BTN).click();
