@@ -29,6 +29,8 @@ module.exports = defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'never',
+    screenshot: 'only-on-failure',
+    video: 'retain-on-failure',
     lauchOptions: {
       logger: {
         isEnabled: (name, severity) => name === 'browser',

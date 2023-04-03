@@ -1,4 +1,4 @@
-export const cartPageLocator = {
+export const cartPageLocator: object = {
 
 
     CHECKOUT_BTN: '//button[@data-test="checkout"]',
