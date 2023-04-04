@@ -1,27 +1,14 @@
-// playwright-dev-page.ts
+// @ts-check
 import { expect, Locator, Page } from '@playwright/test';
-import { cartPageLocator, menuPageLocator } from '../Locators'
+import { cartPageLocator, menuPageLocator, commonLocators } from '../Locators'
+import { Base } from './Base';
 
-export class MenuPage {
+export class MenuPage extends Base {
     readonly page: Page;
 
-    constructor(page: Page) {
-        this.page = page;
 
-    }
-
-    async goto() {
-        await this.page.goto('https://coffee-cart.app/');
-    }
-
-    async checkOut(NAME: string, EMAIL: string) {
-        await this.page.locator(menuPageLocator.CHECKOUT_BTN).click();
-        await this.page.locator(menuPageLocator.NAME).fill(NAME);
-        await this.page.locator(menuPageLocator.EMAIL).fill(EMAIL);
-    }
-
-    async submit() {
-        await this.page.locator(menuPageLocator.SUBMIT_BTN).click();
+    async hover() {
+        await this.page.locator(commonLocators.CHECKOUT_BTN).hover();
     }
 
 

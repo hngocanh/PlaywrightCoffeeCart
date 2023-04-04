@@ -1,11 +1,13 @@
 // @ts-check
 const { test, expect } = require('@playwright/test');
-import { cartPageLocator, menuPageLocator } from '../Locators'
+import { cartPageLocator, commonLocators, menuPageLocator } from '../Locators'
 import { info } from './Data'
+import { MenuPage, Base } from '../PageObjects'
 
 
 test('Items are added and checkout is successful from Cart page', async ({ page }) => {
-  await page.goto('https://coffee-cart.app/');
+  const base = new Base(page);
+  await base.goto();
 
   // Add first item
   await page.locator(menuPageLocator.AMERICANO).click();
@@ -14,13 +16,13 @@ test('Items are added and checkout is successful from Cart page', async ({ page 
   await page.locator(menuPageLocator.CAFE_LATTE).click();
 
   // Go to Cart 
-  await page.locator(menuPageLocator.CART).click();
+  await page.locator(commonLocators.CART).click();
 
   // Checkout
-  await menuPage.submit();
+  await base.checkOut(info.USERNAME, info.EMAIL);
 
   // Click Submit
-  await page.locator(menuPageLocator.SUBMIT_BTN).click();
+  await base.submit();
 
   // Checkout is successful
   await expect(page.locator('text=Thanks for your purchase. Please check your email for payment.')).toBeVisible();
