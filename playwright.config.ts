@@ -21,22 +21,24 @@ module.exports = defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [["line"], ["allure-playwright"]],
+  reporter: process.env.CI ? [["junit", {
+    outputFile: "results.xml"
+  }]] : [["json", {
+    outputFile: "report.json"
+  }], ["html", {
+    open: "on-failure"
+  }]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
+    headless: process.env.CI ? true : false,
     /* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: 'http://127.0.0.1:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'never',
-    screenshot: 'only-on-failure',
-    video: 'retain-on-failure',
-    lauchOptions: {
-      logger: {
-        isEnabled: (name, severity) => name === 'browser',
-        log: (name, severity, message, args) => console.log(`${name} ${message}`)
-      }
-    }
+    trace: process.env.CI ? "off" : "on",
+    video: process.env.CI ? "off" : "on",
+    screenshot: process.env.CI ? "off" : "on",
+    
 
   },
 
